@@ -149,28 +149,42 @@ void testApp::draw(){
     
     for ( int i = 0; i < lines.size(); i++){
         
-        //ofCircle(lines[i].center, 3);
-         lines[i].Debugdraw();
+        ofPushStyle();
+        ofSetColor(255, 0, 0);
+        ofCircle(lines[i].center, 3);
+        ofPopStyle();
         
-        triPoint = lines[i].center;
+        //lines[i].Debugdraw();
+        
+        ofPushStyle();
+        ofSetColor(0, 255, 0);
+        lines[i].firstStrokePoint();
+        ofPopStyle();
+        
+        ofVec2f triPoint = lines[i].center;
         triangulation.addPoint(triPoint);
         
         ofVec2f a = lines[i-2].center;
         ofVec2f b = lines[i-1].center;
         ofVec2f c = lines[i].center;
         
-      
+        
+        ofPushStyle();
+        ofSetLineWidth(1);
         lines[i].drawWavyLine(a, b);
         lines[i].drawWavyLine(b, c);
         lines[i].drawWavyLine(c, a);
         
-        ofPushStyle();
-        ofSetColor(255, 0, 0);
-        if ( ofDist(lines[i].line[i].pos.x, lines[i].line[i].pos.y, lines[i].center.x, lines[i].center.y) < 100){
-        //ofLine(lines[i].center, lines[i].line[i].pos);
-         //lines[i].branch(0.7, 50, 4, 10);
-        }
         ofPopStyle();
+        
+        ofPushMatrix();
+        ofPushStyle();
+        ofTranslate(0, ofGetWindowHeight()/2);
+        //ofSetColor(0, 0, 255);
+        //lines[i].branch(0.7, 50, 8);
+
+        ofPopStyle();
+        ofPopMatrix();
         
         
         
@@ -205,7 +219,7 @@ void testApp::keyPressed(int key){
     
 }
 
-//--------------------------------------------------------------e
+//---------------------------------------------------------------
 void testApp::keyReleased(int key){
     
 }

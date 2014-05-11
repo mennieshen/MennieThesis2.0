@@ -90,11 +90,6 @@ void Stroke::Debugdraw() {
         
         ofCircle(line[i].pos, 1);
         
-        ofPushStyle();
-        ofSetColor(255, 0, 0);
-        ofCircle(center, 3);
-        ofPopStyle();
-        
     }
     
 }
@@ -102,15 +97,14 @@ void Stroke::Debugdraw() {
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 void Stroke::drawLength() {
     
-    ofSetColor(255);
-    ofLine(0, 0, length, 0);
+    ofLine(0, 0, 0, length);
     
 }
 
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-void Stroke::branch(float threshold, float lengthMult, float _maxit, float _dg) {
+void Stroke::branch(float threshold, float lengthMult, float _maxit) {
     
-    branchAngle = _dg;
+    //branchAngle = _dg;
     maxit = _maxit;
     
     ofPushStyle();
@@ -123,7 +117,7 @@ void Stroke::branch(float threshold, float lengthMult, float _maxit, float _dg) 
     ofRotate(angle);
     
     //do the branch
-    //first we normalize the theshold to a value that we can use on any situation
+    //normalize the threshold to a value so we can use on any situation
     normThr = ofMap(threshold, 0, 1, 0, topDeltaPress);
     
     //cout << topDeltaPress << endl;
@@ -146,7 +140,6 @@ void Stroke::branch(float threshold, float lengthMult, float _maxit, float _dg) 
             
             ofPushStyle();
             ofSetColor(0, 0, 255);
-            ofSetColor(0);
             nested(lastPoint, 10, lengthMult, line.size()-i, 1);
             ofPopStyle();
             
@@ -283,7 +276,7 @@ void Stroke::drawWavyLine(ofVec2f a, ofVec2f b) {
 		float d = f/TWO_PI;
 		
 		float window = 1-4*(d-0.5)*(d-0.5);
-		ofVec2f sine = n * sin(f+1000)*ofMap(length, 0, 200, 0, 8)*window;
+		ofVec2f sine = n * sin(f)*ofMap(length, 0, 200, 0, 10)*window;
 		ofVec2f p = sine + a + diff * d;
         
 		glVertex2f(p.x, p.y);
@@ -293,4 +286,23 @@ void Stroke::drawWavyLine(ofVec2f a, ofVec2f b) {
 	glEnd();
 }
 
+//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+void Stroke::firstStrokePoint(){
+    
+//    ofPushStyle();
+//    ofSetColor(0, 255, 0);
+//    ofPopMatrix();
+    for (int i = 0; i < line.size(); i++){
+    
+    if (line[i].prs > 1.0 || line[i].prs < 0.0){
+        
+        ofCircle(line[i].pos, 3);
+        drawLength();
+
+        
+        }
+    }
+    
+    
+}
 

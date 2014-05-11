@@ -21,9 +21,10 @@ public:
     void getAngle(float min, float max);
     void Debugdraw();
     void drawLength();
-    void branch(float threshold, float lengthMult, float _maxit, float _dg);
+    void branch(float threshold, float lengthMult, float _maxit);
     void nested(ofVec2f current, float angle , float lengthMult, float left, float lvl);
     void drawWavyLine(ofVec2f a, ofVec2f b);
+    void firstStrokePoint();
     
     
     float maxit;
