@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D38A59AD-C768-47C1-BD92-AD160722051E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ThesisPrototype_06</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C9BEF520-7CFD-411A-9F87-EE083189FF4B</key>
+		<string>https://github.com/mennieshen/Thesis</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ThesisPrototype_06/ThesisPrototype_06.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C9BEF520-7CFD-411A-9F87-EE083189FF4B</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/mennieshen/Thesis</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C9BEF520-7CFD-411A-9F87-EE083189FF4B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C9BEF520-7CFD-411A-9F87-EE083189FF4B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MennieThesis</string>
+		</dict>
+	</array>
+</dict>
+</plist>
