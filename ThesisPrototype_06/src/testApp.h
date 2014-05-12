@@ -50,7 +50,6 @@ public:
     int snapCounter;
     
     ofFile sendInkFile;
-    
     ofxCUPS printer;
     
     

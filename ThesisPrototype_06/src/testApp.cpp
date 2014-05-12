@@ -7,7 +7,6 @@ void testApp::setup(){
     ofSetCircleResolution(100);
     ofBackground(255);
 
-    
 
     /*
     //---Get Latest Modified File and Send it to Data folder
@@ -135,6 +134,7 @@ void testApp::setup(){
 //--------------------------------------------------------------
 void testApp::update(){
     
+   
     triangulation.reset();
     printer.updatePrinterInfo();
     
@@ -147,20 +147,22 @@ void testApp::draw(){
     ofTranslate(ofGetWindowWidth()/2, 0);
     //ofNoFill();
     ofSetColor(0);
-    
+
     for ( int i = 0; i < lines.size(); i++){
         
-//        ofPushStyle();
-//        ofSetColor(255, 0, 0);
-//        ofCircle(lines[i].center, 3);
-//        ofPopStyle();
-//        
-//        //lines[i].Debugdraw();
-//        
-//        ofPushStyle();
-//        ofSetColor(0, 255, 0);
-//        lines[i].firstStrokePoint();
-//        ofPopStyle();
+        
+        
+        ofPushStyle();
+        ofSetColor(0);
+        ofCircle(lines[i].center, 3);
+        ofPopStyle();
+        
+        //lines[i].Debugdraw();
+        
+        ofPushStyle();
+        ofSetColor(0, 255, 0);
+        //lines[i].firstStrokePoint();
+        ofPopStyle();
         
         ofVec2f triPoint = lines[i].center;
         triangulation.addPoint(triPoint);
@@ -181,13 +183,13 @@ void testApp::draw(){
         lines[i].drawWavyLine(b, c);
         lines[i].drawWavyLine(c, a);
         }
-        
+    
         
         ofPushMatrix();
         ofPushStyle();
-        ofTranslate(0, ofGetWindowHeight()/2);
-        //ofSetColor(0, 0, 255);
-        lines[i].branch(0.7, 50, 8);
+        //ofTranslate(0, ofGetWindowHeight()/2);
+        ofSetColor(0, 0, 255);
+        lines[i].branch();
 
         ofPopStyle();
         ofPopMatrix();
@@ -200,11 +202,10 @@ void testApp::draw(){
     triangulation.triangulate();
     ofPushStyle();
     ofNoFill();
-    triangulation.draw();
+    //triangulation.draw();
     ofPopStyle();
     ofPopMatrix();
     
-
     saveImg.grabScreen(0,0,ofGetWindowWidth(), ofGetWindowHeight());
     saveImg.saveImage("Lettergraphy-"+ofToString(snapCounter)+".png");
 

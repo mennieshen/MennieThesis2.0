@@ -9,6 +9,8 @@
 #include "Stroke.h"
 
 Stroke::Stroke() {
+    
+   
 };
 
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -32,6 +34,7 @@ void Stroke::normpreasure() {
         avrDeltaPress += line[i].prs;
     }
     avrDeltaPress = avrDeltaPress/line.size();
+    cout << avrDeltaPress << endl;
     
     topDeltaPress = 0;
     for (int t = 0; t < line.size(); t++) {
@@ -54,6 +57,7 @@ void Stroke::getLength() {
         float tmplength = ofDist(line[i].pos.x, line[i].pos.y, line[i+1].pos.x, line[i+1].pos.y);
         
         length = length+tmplength;
+       
     }
 }
 
@@ -102,15 +106,31 @@ void Stroke::drawLength() {
 }
 
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-void Stroke::branch(float threshold, float lengthMult, float _maxit) {
+void Stroke::branch() {
+ 
     
-    maxit = _maxit;
+    ofVec2f growPoint;
+    remaining = line.size();
+    
+    
+    for(int i = 0; i < remaining-1; i++){
+
+        float dist = ofDist(line[i].pos.x, line[i].pos.y, line[i+1].pos.x, line[i+1].pos.y);
+        dist = abs(dist)*10;
+        cout << dist << endl;
+        growPoint.x = center.x + cos(angle)*dist;
+        growPoint.y = center.y + sin(angle)*dist;
+        ofLine(center, growPoint);
+        remaining = remaining-1;
+        
+        
+    }
+    
+    /*
+    //maxit = _maxit;
+    // threshold, lengthMult
     
     ofPushStyle();
-    ofSetColor(0);
-    ofSetLineWidth(0.1);
-    ofNoFill();
-    
     ofPushMatrix();
     
     ofRotate(angle);
@@ -173,7 +193,7 @@ void Stroke::branch(float threshold, float lengthMult, float _maxit) {
     // end the branch
     ofPopMatrix();
     ofPopStyle();
-    
+    */
     
 }
 
@@ -254,6 +274,7 @@ void Stroke::nested(ofVec2f current, float _angle, float _lengthMult, float left
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 void Stroke::drawWavyLine(ofVec2f a, ofVec2f b) {
     
+
 	ofVec2f diff = (b-a);
 	float length = diff.length();
 	
@@ -268,8 +289,7 @@ void Stroke::drawWavyLine(ofVec2f a, ofVec2f b) {
 	
     
 	glBegin(GL_LINE_STRIP);
-    
-    
+
 	for(float f = 0; f < PI*2; f+=PI/5.f) {
 		float d = f/TWO_PI;
 		
