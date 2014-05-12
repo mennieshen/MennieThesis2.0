@@ -6,6 +6,7 @@ void testApp::setup(){
     ofSetVerticalSync(true);
     ofSetCircleResolution(100);
     ofBackground(255);
+
     
 
     /*
@@ -149,17 +150,17 @@ void testApp::draw(){
     
     for ( int i = 0; i < lines.size(); i++){
         
-        ofPushStyle();
-        ofSetColor(255, 0, 0);
-        ofCircle(lines[i].center, 3);
-        ofPopStyle();
-        
-        //lines[i].Debugdraw();
-        
-        ofPushStyle();
-        ofSetColor(0, 255, 0);
-        lines[i].firstStrokePoint();
-        ofPopStyle();
+//        ofPushStyle();
+//        ofSetColor(255, 0, 0);
+//        ofCircle(lines[i].center, 3);
+//        ofPopStyle();
+//        
+//        //lines[i].Debugdraw();
+//        
+//        ofPushStyle();
+//        ofSetColor(0, 255, 0);
+//        lines[i].firstStrokePoint();
+//        ofPopStyle();
         
         ofVec2f triPoint = lines[i].center;
         triangulation.addPoint(triPoint);
@@ -168,20 +169,25 @@ void testApp::draw(){
         ofVec2f b = lines[i-1].center;
         ofVec2f c = lines[i].center;
         
+        if (a.x - b.x > ofGetWindowWidth()/4 || b.x - c.x > ofGetWindowWidth()/4 || c.x - a.x > ofGetWindowWidth()/4){
         
-        ofPushStyle();
-        ofSetLineWidth(1);
+            a.set(0,0);
+            b.set(0,0);
+            c.set(0,0);
+        
+        }
+        else{
         lines[i].drawWavyLine(a, b);
         lines[i].drawWavyLine(b, c);
         lines[i].drawWavyLine(c, a);
+        }
         
-        ofPopStyle();
         
         ofPushMatrix();
         ofPushStyle();
         ofTranslate(0, ofGetWindowHeight()/2);
         //ofSetColor(0, 0, 255);
-        //lines[i].branch(0.7, 50, 8);
+        lines[i].branch(0.7, 50, 8);
 
         ofPopStyle();
         ofPopMatrix();
@@ -194,7 +200,7 @@ void testApp::draw(){
     triangulation.triangulate();
     ofPushStyle();
     ofNoFill();
-    //triangulation.draw();
+    triangulation.draw();
     ofPopStyle();
     ofPopMatrix();
     

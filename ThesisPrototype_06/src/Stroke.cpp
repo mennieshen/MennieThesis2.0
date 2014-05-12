@@ -104,7 +104,6 @@ void Stroke::drawLength() {
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 void Stroke::branch(float threshold, float lengthMult, float _maxit) {
     
-    //branchAngle = _dg;
     maxit = _maxit;
     
     ofPushStyle();
@@ -126,6 +125,7 @@ void Stroke::branch(float threshold, float lengthMult, float _maxit) {
     //now the branch algorithm
     ofVec2f lastPoint;
     lastPoint.set(0, 0);
+  
     remaining = line.size();
     //cout << remaining << endl;
     
@@ -133,10 +133,8 @@ void Stroke::branch(float threshold, float lengthMult, float _maxit) {
         
         //cout << remaining-1 << endl;
         ofVec2f currentPoint;
-        //cout << i << "|" << topDeltaPress << "|" << normThr << "|" << line[i].prs << endl;
-        
-        
-        if ( line[i].prs < 0.99 && line[i].prs > normThr) {
+
+        if (line[i].prs > 1.0 || line[i].prs < 0.0) {
             
             ofPushStyle();
             ofSetColor(0, 0, 255);
@@ -276,7 +274,7 @@ void Stroke::drawWavyLine(ofVec2f a, ofVec2f b) {
 		float d = f/TWO_PI;
 		
 		float window = 1-4*(d-0.5)*(d-0.5);
-		ofVec2f sine = n * sin(f)*ofMap(length, 0, 200, 0, 10)*window;
+		ofVec2f sine = n * ofNoise(sin(f)*0.1,cos(f)*0.1)*ofMap(length, 0, 200, 0, 50)*window;
 		ofVec2f p = sine + a + diff * d;
         
 		glVertex2f(p.x, p.y);
@@ -289,15 +287,11 @@ void Stroke::drawWavyLine(ofVec2f a, ofVec2f b) {
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 void Stroke::firstStrokePoint(){
     
-//    ofPushStyle();
-//    ofSetColor(0, 255, 0);
-//    ofPopMatrix();
     for (int i = 0; i < line.size(); i++){
     
     if (line[i].prs > 1.0 || line[i].prs < 0.0){
         
         ofCircle(line[i].pos, 3);
-        drawLength();
 
         
         }
