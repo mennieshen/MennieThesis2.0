@@ -108,21 +108,20 @@ void Stroke::drawLength() {
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 void Stroke::branch() {
  
-    
-    ofVec2f growPoint;
     remaining = line.size();
     
     
     for(int i = 0; i < remaining-1; i++){
 
         float dist = ofDist(line[i].pos.x, line[i].pos.y, line[i+1].pos.x, line[i+1].pos.y);
-        dist = abs(dist)*10;
-        cout << dist << endl;
+        dist = abs(dist)*30;
+        //float angleint = ofNoise((float)i/line.size());
+        //angleint = ofMap(angleint, 0, 1, 0, PI/4, true);
         growPoint.x = center.x + cos(angle)*dist;
         growPoint.y = center.y + sin(angle)*dist;
-        ofLine(center, growPoint);
+        //ofLine(center.x, center.y, growPoint.x*ofNoise(cos(angle)), growPoint.y*ofNoise(sin(angle)));
+        ofLine(center.x, center.y, growPoint.x, growPoint.y);
         remaining = remaining-1;
-        
         
     }
     

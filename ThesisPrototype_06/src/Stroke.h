@@ -42,6 +42,8 @@ public:
     
     vector <dot> line;
     
+    ofVec2f growPoint;
+    
     
     
 };

@@ -185,16 +185,8 @@ void testApp::draw(){
         }
     
         
-        ofPushMatrix();
-        ofPushStyle();
-        //ofTranslate(0, ofGetWindowHeight()/2);
-        ofSetColor(0, 0, 255);
         lines[i].branch();
-
-        ofPopStyle();
-        ofPopMatrix();
-        
-        
+        lines[i].drawWavyLine(lines[i].growPoint, lines[i+1].growPoint);
         
     }
     
